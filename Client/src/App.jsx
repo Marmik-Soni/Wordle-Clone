@@ -1,22 +1,23 @@
-import { useState,useEffect } from "react";
+// Importing React and CSS
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
+// Importing components
+import Game from "./UI/game";
+import Header from "./UI/Header";
+import LandingPage from "./UI/landngPage";
+
+// Importing Router
+// import { Routes, Route } from "react-router-dom";
+
 function App() {
-  const [word, setWord] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/word")
-      .then((response) => response.json())
-      .then((data) => setWord(data.word))
-      .catch((error) => console.error("Error fetching word:", error));
-  }, []);
-
   return (
     <>
-      <div className="app">
-        <h1>Wordle Game!</h1>
-        <p>Today's Word: {word ? word : "Loading..."}</p>
-      </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/game" element={<Game />} />
+      <Route path="" element={<Header />} />
+    </Routes>
     </>
   );
 }

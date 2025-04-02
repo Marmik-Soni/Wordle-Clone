@@ -1,4 +1,10 @@
+//Imorting Router Dom for navigation
+import { useNavigate } from "react-router-dom";
+
 function LandingPage() {
+
+  const navigate = useNavigate(); 
+
   // Get today's date in "Month Day, Year" format
   const today = new Date().toLocaleDateString("en-US", {
     month: "long",
@@ -22,18 +28,24 @@ function LandingPage() {
 
         <div className="button-container">
           <button className="button-stats">Stats</button>
-          <button className="button-play">Play</button>
+          <button className="button-play" onClick={() => navigate("/game")}>
+            Play
+          </button>
         </div>
 
-        {/* Date Display on the Left */}
+        {/* Date Display */}
         <p className="date-display">{today}</p>
 
         <p className="edited-by">
-                    Edited by{" "}
-                    <a href="https://www.linkedin.com/in/marmiksoni" target="_blank" rel="noopener noreferrer">
-                        Marmik Soni
-                    </a>
-                </p>
+          Edited by{" "}
+          <a
+            href="https://www.linkedin.com/in/marmiksoni"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Marmik Soni
+          </a>
+        </p>
       </header>
     </>
   );
