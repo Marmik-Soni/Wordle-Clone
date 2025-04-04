@@ -203,102 +203,162 @@
 
 /* Game container styling */
 .game-container {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: center; /* Keep content centered vertically */
-    align-items: center; /* Center horizontally */
-    background-color: #121213;
-    width: 100%;
-    height: 100vh;
-    color: white;
-    gap: 20px; /* Adds spacing between grid and keyboard */
-  }
-
-
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Keep content centered vertically */
+  align-items: center; /* Center horizontally */
+  background-color: #121213;
+  width: 100%;
+  height: 100vh;
+  color: white;
+  margin-top: 30px;
+  gap: 20px;
+}
 
 /* Game board styling */
 .word-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .grid-row {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .grid-cell {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 60px;
-    height: 60px;
-    background-color: #121213;
-    border: 2px solid #3a3a3c;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-  }    
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-top: -20px;
+}
 
-  
-  /* Keyboard Styling*/
-  .keyboard {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-top: -30px;
-  }
-  
-  .keyboard-row {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-  }
-  
+.grid-row {
+  display: flex;
+  gap: 8px;
+}
+
+.grid-cell {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: 45px;
+  height: 45px;
+  background-color: #121213;
+  border: 2px solid #3a3a3c;
+  color: white;
+  font-size: 28px; /* slightly smaller */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Wordle-style color feedback */
+.grid-cell.green {
+  background-color: #538d4e;
+  border-color: #538d4e;
+  color: white;
+}
+
+.grid-cell.yellow {
+  background-color: #b59f3b;
+  border-color: #b59f3b;
+  color: white;
+}
+
+.grid-cell.gray {
+  background-color: #3a3a3c;
+  border-color: #3a3a3c;
+  color: white;
+}
+
+
+/* Keyboard Styling*/
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.keyboard-row {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.key {
+  background-color: #818384;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  width: 45px;
+  height: 60px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+
+.key:hover {
+  background-color: #565758;
+}
+
+.special-key {
+  width: 80px;
+  background-color: #565758;
+}
+
+.special-key:hover {
+  background-color: #3a3a3c;
+}
+
+/* Colored states for keys based on guess feedback */
+.key.green {
+  background-color: #538d4e !important;
+  color: white;
+}
+
+.key.yellow {
+  background-color: #b59f3b !important;
+  color: white;
+}
+
+.key.gray {
+  background-color: #3a3a3c !important;
+  color: white;
+}
+
+@media (max-width: 500px) {
   .key {
-    background-color: #818384;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    width: 40px;
-    height: 50px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: background 0.2s ease;
+    width: 35px;
+    height: 45px;
+    font-size: 16px;
   }
-  
-  .key:hover {
-    background-color: #565758;
-  }
-  
+
   .special-key {
-    width: 80px;
-    background-color: #565758;
+    width: 70px;
   }
-  
-  .special-key:hover {
-    background-color: #3a3a3c;
+}
+
+.game-over {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #f2f2f2;
+  color: #000;
+  padding: 5px 15px;
+  border-radius: 9px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: -10px;
+  margin-top: -10px;
+  box-shadow: 0px 4px 10px rgba(11, 151, 16, 0.1);
+  animation: pop-in 0.3s ease;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
   }
-  
-  @media (max-width: 500px) {
-    .key {
-      width: 35px;
-      height: 45px;
-      font-size: 16px;
-    }
-  
-    .special-key {
-      width: 70px;
-    }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
+}
