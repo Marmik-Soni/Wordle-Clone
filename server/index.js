@@ -10,7 +10,7 @@ app.use(express.json());
 
 // API Route - Returns Today's Word
 app.get("/api/word", (req, res) => {
-  res.json({ word: "TASTE" }); // You can change "HELLO" to any word
+  res.json({ word: "WATER" }); // You can change "HELLO" to any word
 });
 
 // Start Server
