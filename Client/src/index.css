@@ -6,16 +6,27 @@
   font-style: normal;
 }
 
+/* Global box-sizing for consistent layout calculations */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+}
+
 /* Logo styling */
 .logo {
   margin-top: 165px;
   height: 64px;
 }
 
-/* Home title styling */
+/* Home section styling */
 .home {
   margin-bottom: 140px;
 }
+
 .home-title {
   font-family: "NYTKarnakCondensed";
   font-size: 3rem;
@@ -129,6 +140,14 @@
   transform: scale(1.1);
 }
 
+.icon-button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
 /* Menu Icon */
 .menu-icon {
   margin-left: 20px;
@@ -215,24 +234,30 @@
   gap: 20px;
 }
 
-/* Game board styling */
+
+
+
+
+
+
+/* Game Grid Styling */
 .word-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
   margin-top: -20px;
 }
 
 .grid-row {
   display: flex;
-  gap: 8px;
+  gap: 5px;
 }
 
 .grid-cell {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   background-color: #121213;
   border: 2px solid #3a3a3c;
   color: white;
@@ -337,7 +362,7 @@
 }
 
 .game-over {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   background-color: #f2f2f2;
   color: #000;
   padding: 5px 15px;
@@ -360,5 +385,302 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .logo {
+    margin-top: 80px;
+    height: 48px;
+  }
+
+  .home {
+    margin-bottom: 80px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .home-title {
+    font-size: 2rem;
+    line-height: 120%;
+  }
+
+  .home-desc {
+    font-size: 20px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    align-items: center;
+  }
+
+  .button-stats,
+  .button-play {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .date-display {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .edited-by {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  /* Header and Header Icons */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: #121213;
+  }
+  
+  .menu-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: -2px;
+  }
+  
+  .header-icons {
+    display: flex;
+    gap: 12px;
+    margin-right: -4px;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+  /* Loading Screen CSS */
+  .loading-logo {
+    height: 50px;
+    margin-top: 50px;
+  }
+
+  .loading-name {
+    font-size: 1rem;
+  }
+
+  .loading-spinner {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Game container */
+  .game-container {
+    padding: 10px;
+    height: auto;
+    min-height: 100vh;
+    margin-top: -20px;
+  }
+
+  /* Responsive keyboard rows */
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .keyboard-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  /* Responsive key sizes */
+  .key {
+    font-size: 1rem;
+    padding: 10px 6px;
+    width: 29px;
+    height: 50px;
+  }
+
+  /* Special keys in small screens */
+  .special-key {
+    min-width: 52px;
+    font-size: 0.8rem;
+    padding: 8px 6px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Overlay background */
+.how-to-play-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(18, 18, 19, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal */
+.how-to-play-modal {
+  background-color: #121213;
+  color: white;
+  font-family: 'nyt-franklin', Arial, sans-serif;
+  padding: 32px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  max-height: 90vh;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -12px;
+}
+
+.modal-header h2 {
+  font-family: "NYTKarnakCondensed";
+  font-size: 34px;
+  margin: 0;
+  font-weight: bold;
+}
+
+p{
+  text-align: left;
+}
+
+ul, li{
+  margin-left: -10px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+h3{
+  text-align: left;
+}
+
+/* Close button */
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Tiles container */
+.tiles {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.tile {
+  width: 40px;
+  height: 40px;
+  margin-right: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #191919;
+  border: 2px solid #3a3a3c;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+/* Tile colors */
+.tile.green {
+  background-color: #538d4e;
+}
+
+.tile.yellow {
+  background-color: #b59f3b;
+}
+
+.tile.black {
+  background-color: #3a3a3c;
+}
+
+/* Examples */
+.example {
+  margin-top: 20px;
+}
+
+.example p{
+  text-align: left;
+}
+
+/* Reminder text */
+.reminder {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #d7dadc;
+}
+
+.reminder a {
+  color: #66aaff;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+  .how-to-play-modal {
+    padding: 20px;
+  }
+
+  .tile {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .modal-header h2 {
+    font-size: 20px;
+  }
+
+  .close-btn {
+    font-size: 24px;
   }
 }

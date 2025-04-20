@@ -5,6 +5,7 @@ import axios from "axios";
 // Importing components
 import Header from "../Components/header";
 import Keyboard from "../Components/keyboard";
+import HowToPlay from "../Components/howToPlay";
 
 function Game() {
   // State to store the guesses made by the player
@@ -35,6 +36,14 @@ function Game() {
 
   // State to track the status of each letter for the keyboard (e.g., green, yellow, gray)
   const [letterStatuses, setLetterStatuses] = useState({});
+
+  // State to show/hide the HowToPlay popup
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+
+  // Function to toggle the HowToPlay modal
+  const toggleHowToPlay = () => {
+    setShowHowToPlay((prev) => !prev);
+  };
 
   // Fetch the correct word from the server when the component mounts
   useEffect(() => {
@@ -135,9 +144,11 @@ function Game() {
   return (
     <>
       {/* Render the header component */}
-      <Header />
+      <Header onHowToPlayClick={toggleHowToPlay} />
 
+      {/* Render the game container */}
       <div className="game-container">
+        
         {/* Render the word grid */}
         <div className="word-grid">
           {guesses.map((row, rowIdx) => (
@@ -159,13 +170,24 @@ function Game() {
           <div className="game-over">
             {guesses[currentRow].join("") === correctWord
               ? "🎉 You Win!" // Display win message if the word is guessed correctly
-              : `Game Over MF 🖕! The word was "${correctWord}"`}{" "}
+              : `Game Over Bro! The word was "${correctWord}"`}
             {/* Display the correct word if the player loses */}
           </div>
         )}
 
         {/* Render the keyboard component and pass the onKeyPress handler and letterStatuses */}
         <Keyboard onKeyPress={handleKeyPress} letterStatuses={letterStatuses} />
+
+        {/* Modal and backdrop rendering */}
+        {showHowToPlay && (
+          <>
+            {/* Backdrop for the modal */}
+            <div className="backdrop" onClick={toggleHowToPlay}></div>
+
+            {/* HowToPlay modal component */}
+            <HowToPlay onClose={toggleHowToPlay} />
+          </>
+        )}
       </div>
     </>
   );
