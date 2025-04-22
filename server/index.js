@@ -1,5 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+
+dotenv.config(); // Load env variables
+connectDB(); // Connect to MongoDB
 
 const app = express();
 const PORT = 5000;
@@ -10,10 +15,10 @@ app.use(express.json());
 
 // API Route - Returns Today's Word
 app.get("/api/word", (req, res) => {
-  res.json({ word: "WATER" }); // You can change "HELLO" to any word
+  res.json({ word: "WATER" }); // Update as needed
 });
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
