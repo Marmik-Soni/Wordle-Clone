@@ -40,6 +40,8 @@ function Game() {
   // State to show/hide the HowToPlay popup
   const [showHowToPlay, setShowHowToPlay] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState(""); // State to store error messages
+
   // Function to toggle the HowToPlay modal
   const toggleHowToPlay = () => {
     setShowHowToPlay((prev) => !prev);
@@ -48,9 +50,20 @@ function Game() {
   // Fetch the correct word from the server when the component mounts
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/word")
-      .then((res) => setCorrectWord(res.data.word.toUpperCase()))
-      .catch((err) => console.error("Failed to fetch word:", err));
+      .get("http://localhost:5000/api/random-word") // Use the random word API
+      .then((res) => {
+        const word = res.data.word.toUpperCase();
+        if (word.length === 5) {
+          setCorrectWord(word); // Set the word only if it's 5 letters long
+        } else {
+          console.error("Fetched word is not 5 letters long:", word);
+          setErrorMessage("Error: Invalid word length. Please refresh.");
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch word:", err);
+        setErrorMessage("Error fetching word. Please try again.");
+      });
   }, []);
 
   // Update the status of letters on the keyboard based on the player's guess
@@ -83,34 +96,66 @@ function Game() {
       // Handle the ENTER key to submit a guess
       if (currentCol === 5) {
         const guessWord = guesses[currentRow].join("");
-        const newColors = [...cellColors];
 
-        const rowColors = Array(5).fill("");
+        // Validate the word before proceeding
+        axios
+          .get(`http://localhost:5000/api/validate/${guessWord.toLowerCase()}`) // Validate word
+          .then((res) => {
+            if (res.data.valid) {
+              // If the word is valid, proceed with the existing logic
+              const newColors = [...cellColors];
+              const rowColors = Array(5).fill("");
+              const correctWordLetterCount = {};
 
-        // Determine the color for each letter in the guess
-        for (let i = 0; i < 5; i++) {
-          if (guessWord[i] === correctWord[i]) {
-            rowColors[i] = "green"; // Correct letter in the correct position
-          } else if (correctWord.includes(guessWord[i])) {
-            rowColors[i] = "yellow"; // Correct letter in the wrong position
-          } else {
-            rowColors[i] = "gray"; // Incorrect letter
-          }
-        }
+              // Count occurrences of each letter in the correct word
+              for (const letter of correctWord) {
+                correctWordLetterCount[letter] = (correctWordLetterCount[letter] || 0) + 1;
+              }
 
-        newColors[currentRow] = rowColors;
-        setCellColors(newColors);
-        updateLetterStatuses(guessWord, rowColors); // Update keyboard letter statuses
+              // First pass: Mark green (correct letter in the correct position)
+              for (let i = 0; i < 5; i++) {
+                if (guessWord[i] === correctWord[i]) {
+                  rowColors[i] = "green";
+                  correctWordLetterCount[guessWord[i]]--;
+                }
+              }
 
-        // Check if the player has won or if the game is over
-        if (guessWord === correctWord) {
-          setGameOver(true);
-        } else if (currentRow === 5) {
-          setGameOver(true);
-        } else {
-          setCurrentRow((prev) => prev + 1); // Move to the next row
-          setCurrentCol(0); // Reset column to the start
-        }
+              // Second pass: Mark yellow (correct letter in the wrong position)
+              for (let i = 0; i < 5; i++) {
+                if (rowColors[i] === "") {
+                  if (correctWord.includes(guessWord[i]) && correctWordLetterCount[guessWord[i]] > 0) {
+                    rowColors[i] = "yellow";
+                    correctWordLetterCount[guessWord[i]]--;
+                  } else {
+                    rowColors[i] = "gray";
+                  }
+                }
+              }
+
+              newColors[currentRow] = rowColors;
+              setCellColors(newColors);
+              updateLetterStatuses(guessWord, rowColors);
+
+              // Check if the player has won or if the game is over
+              if (guessWord === correctWord) {
+                setGameOver(true);
+              } else if (currentRow === 5) {
+                setGameOver(true);
+              } else {
+                setCurrentRow((prev) => prev + 1);
+                setCurrentCol(0);
+              }
+            } else {
+              // If the word is invalid, show an error message
+              setErrorMessage("Word doesn't exist");
+              setTimeout(() => setErrorMessage(""), 3000); // Clear the message after 3 seconds
+            }
+          })
+          .catch((err) => {
+            console.error("Error validating word:", err);
+            setErrorMessage("Error validating word");
+            setTimeout(() => setErrorMessage(""), 3000);
+          });
       }
     } else if (key === "BACKSPACE") {
       // Handle the BACKSPACE key to delete a letter
@@ -174,6 +219,9 @@ function Game() {
             {/* Display the correct word if the player loses */}
           </div>
         )}
+        
+        {/* Display error message */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         {/* Render the keyboard component and pass the onKeyPress handler and letterStatuses */}
         <Keyboard onKeyPress={handleKeyPress} letterStatuses={letterStatuses} />
