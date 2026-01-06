@@ -23,12 +23,16 @@ This is a feature-rich clone of the popular word-guessing game Wordle. Players h
 - **Vue.js 3** - Progressive JavaScript framework
 - **Vite** - Next-generation frontend tooling
 - **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **PostCSS** - CSS transformations
 
 ### Backend (Server)
 
 - **Hono** - Ultrafast web framework
 - **Node.js** - Runtime environment
 - **TypeScript** - Type-safe JavaScript
+- **Drizzle ORM** - TypeScript ORM
+- **Neon PostgreSQL** - Serverless PostgreSQL database
 
 ### Development Tools
 
@@ -37,6 +41,7 @@ This is a feature-rich clone of the popular word-guessing game Wordle. Players h
 - **Prettier** - Code formatting
 - **Husky** - Git hooks
 - **lint-staged** - Run linters on staged files
+- **Drizzle Kit** - Database migrations
 
 ## 📋 Prerequisites
 
@@ -44,6 +49,7 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js** >= 18.0.0
 - **pnpm** >= 8.0.0
+- **Neon Account** - [Sign up](https://neon.tech) for free PostgreSQL database
 
 ## 🚀 Getting Started
 

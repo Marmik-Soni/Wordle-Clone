@@ -18,6 +18,10 @@ This document provides a complete overview of the Wordle Clone project setup.
 - **Vite 7.2.5** - Build tool (using rolldown-vite)
 - **TypeScript 5.9.3** - Type safety
 - **Vue TSC** - TypeScript compiler for Vue
+- **Tailwind CSS 4.1.18** - Utility-first CSS framework
+- **@tailwindcss/postcss 4.1.18** - PostCSS plugin
+- **PostCSS 8.5.6** - CSS transformations
+- **Autoprefixer 10.4.23** - CSS vendor prefixing
 
 #### Backend (Server)
 
@@ -25,6 +29,10 @@ This document provides a complete overview of the Wordle Clone project setup.
 - **@hono/node-server** - Node.js adapter
 - **TypeScript 5.8.3** - Type safety
 - **tsx** - TypeScript execution for development
+- **Drizzle ORM 0.45.1** - TypeScript-first ORM
+- **@neondatabase/serverless 1.0.2** - Neon database driver
+- **drizzle-kit 0.31.8** - Database migrations and introspection
+- **dotenv 17.2.3** - Environment variable management
 
 #### Development Tools
 
