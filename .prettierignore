@@ -5,3 +5,4 @@ dist-ssr
 coverage
 pnpm-lock.yaml
 .husky
+server/.env
