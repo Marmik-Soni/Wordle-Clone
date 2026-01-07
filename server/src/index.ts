@@ -4,7 +4,6 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { db } from './db/index.js';
 import { words } from './db/schema.js';
-import { eq } from 'drizzle-orm';
 
 const app = new Hono();
 
@@ -27,7 +26,7 @@ app.get('/api/words', async (c) => {
   try {
     const allWords = await db.select().from(words).limit(10);
     return c.json({ words: allWords });
-  } catch (error) {
+  } catch (_error) {
     return c.json({ error: 'Failed to fetch words' }, 500);
   }
 });
@@ -38,7 +37,7 @@ app.post('/api/words', async (c) => {
     const { word } = await c.req.json();
     const newWord = await db.insert(words).values({ word }).returning();
     return c.json({ word: newWord[0] });
-  } catch (error) {
+  } catch (_error) {
     return c.json({ error: 'Failed to add word' }, 500);
   }
 });
