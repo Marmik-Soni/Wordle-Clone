@@ -1,5 +1,8 @@
 # Wordle Clone
 
+![CI](https://github.com/yourusername/wordle-clone/workflows/CI/badge.svg)
+![Deploy](https://github.com/yourusername/wordle-clone/workflows/Deploy/badge.svg)
+
 A modern, open-source Wordle clone built with Vue.js and Hono, showcasing best practices in full-stack TypeScript development.
 
 ## 🎮 About
@@ -181,8 +184,8 @@ This project uses ESLint and Prettier for code quality and formatting. Pre-commi
 
 - [Quick Start Guide](Docs/QUICKSTART.md) - Get started in 5 minutes
 - [Development Guide](Docs/DEVELOPMENT.md) - Comprehensive guide for beginners (Vue.js & Hono)
-- [Setup Documentation](Docs/SETUP.md) - Complete project setup details
-- [Project Status](Docs/PROJECT_STATUS.md) - Current status and next steps
+- [Setup Documentation](Docs/SETUP.md) - Complete project setup details- [CI/CD Pipeline](Docs/CI-CD.md) - Continuous Integration and Deployment
+- [Deployment Guide](Docs/DEPLOYMENT.md) - Production deployment instructions- [Project Status](Docs/PROJECT_STATUS.md) - Current status and next steps
 - [Contributing Guidelines](CONTRIBUTING.md) - How to contribute
 
 ## �📝 License

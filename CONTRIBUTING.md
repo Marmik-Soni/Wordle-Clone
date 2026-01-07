@@ -48,7 +48,20 @@ Pre-commit hooks will automatically run these checks, but it's good practice to 
 
 ## 🧪 Testing
 
-(Testing framework will be added in future iterations)
+Our CI/CD pipeline automatically runs tests on all pull requests. Before submitting:
+
+```bash
+# Run linting
+pnpm lint
+
+# Run type checking
+pnpm type-check
+
+# Build both projects
+pnpm build
+```
+
+See [CI/CD Documentation](Docs/CI-CD.md) for more details about our automated testing.
 
 ## 📋 Pull Request Process
 
@@ -114,7 +127,8 @@ server/         # Hono backend
 
 - [Development Guide](Docs/DEVELOPMENT.md) - Beginner-friendly guide for Vue.js & Hono
 - [Setup Documentation](Docs/SETUP.md) - Complete project details
-- [Quick Start Guide](Docs/QUICKSTART.md) - Get started quickly
+- [Quick Start Guide](Docs/QUICKSTART.md) - Get started quickly- [CI/CD Pipeline](Docs/CI-CD.md) - Automated testing and deployment
+- [Deployment Guide](Docs/DEPLOYMENT.md) - Production deployment
 
 ## �📞 Questions?
 
